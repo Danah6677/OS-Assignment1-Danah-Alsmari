@@ -46,6 +46,7 @@ class Process implements Runnable {
     // This method will be called when the thread for this process is started
     @Override
     public void run() {
+        contextSwitchCount++;
         // Simulate running for either the time quantum or remaining time, whichever is smaller
         int runTime = Math.min(timeQuantum, remainingTime); // Run for the smaller of the two times
         
@@ -149,13 +150,13 @@ class Process implements Runnable {
 }
 
 public class SchedulerSimulation {
+    // Counter to track total number of context switches
+    private static int contextSwitchCount = 0;
     public static void main(String[] args) {
         // ⚠️ IMPORTANT: Put your student ID here to seed the random number generator
         // This makes your output unique to you - DO NOT forget to change this!
         int studentID = 445052043;  // ← CHANGE THIS TO YOUR ACTUAL STUDENT ID
-        
-        Random random = new Random(studentID);
-        
+
         // Define the time quantum in milliseconds (the maximum time a process gets in one round)
         // Choose a random number between 2000 and 5000 ms with a step of 1000 ms
         int timeQuantum = 2000 + random.nextInt(4) * 1000; // Random: 2000, 3000, 4000, or 5000
@@ -270,7 +271,8 @@ public class SchedulerSimulation {
                 }
             }
         }
-        
+        // Print total context switches performed
+        System.out.println(Colors.BOLD + Colors.BRIGHT_GREEN + "Total Context Switches: " + contextSwitchCount + Colors.RESET);
         // End of the scheduler simulation
         System.out.println(Colors.BOLD + Colors.BRIGHT_GREEN + 
                           "╔════════════════════════════════════════════════════════════════════════════════╗" + 
