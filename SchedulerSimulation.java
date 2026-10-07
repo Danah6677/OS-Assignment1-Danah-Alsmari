@@ -30,6 +30,23 @@ class Process implements Runnable {
     private int timeQuantum; // Time slice (time quantum) allowed per CPU access (in milliseconds)
     private int remainingTime; // Time left for the process to finish its execution
     private int priority; //process priority from 1 to 10
+    //  3Waiting Time Tracking Variables ---
+    private long arrivalTime = System.currentTimeMillis();
+    private long waitingTime = 0;
+    private long lastRunTime = 0;
+
+    public long getWaitingTime() {
+        return waitingTime;
+    }
+
+    public int getBurstTime() {
+        return burstTime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     // Constructor to initialize the process with name, burst time, and time quantum , priority
     public Process(String name, int burstTime, int timeQuantum, int priority) {
         this.name = name;
@@ -37,16 +54,24 @@ class Process implements Runnable {
         this.timeQuantum = timeQuantum;
         this.remainingTime = burstTime; // Initially, remaining time is equal to the burst time
         this.priority = priority;
-        // getter method to retrieve process priority
-        public int getPriority() {
-            return priority ;
-        }
+    }
+
+    // getter method to retrieve process priority
+    public int getPriority() {
+        return priority;
     }
 
     // This method will be called when the thread for this process is started
     @Override
     public void run() {
-        contextSwitchCount++;
+        // Calculate waiting time
+        long currentTime = System.currentTimeMillis();
+        if (lastRunTime == 0) {
+            waitingTime += (currentTime - arrivalTime);
+        } else {
+            waitingTime += (currentTime - lastRunTime);
+        }
+        lastRunTime = System.currentTimeMillis();
         // Simulate running for either the time quantum or remaining time, whichever is smaller
         int runTime = Math.min(timeQuantum, remainingTime); // Run for the smaller of the two times
         
@@ -129,16 +154,6 @@ class Process implements Runnable {
             System.out.println(Colors.RED + "  ✗ " + name + " was interrupted." + Colors.RESET);
         }
     }
-
-    // Getter methods for process name, burst time, and remaining time
-    public String getName() {
-        return name;
-    }
-
-    public int getBurstTime() {
-        return burstTime;
-    }
-
     public int getRemainingTime() {
         return remainingTime;
     }
@@ -156,7 +171,7 @@ public class SchedulerSimulation {
         // ⚠️ IMPORTANT: Put your student ID here to seed the random number generator
         // This makes your output unique to you - DO NOT forget to change this!
         int studentID = 445052043;  // ← CHANGE THIS TO YOUR ACTUAL STUDENT ID
-
+        Random random = new Random(studentID);
         // Define the time quantum in milliseconds (the maximum time a process gets in one round)
         // Choose a random number between 2000 and 5000 ms with a step of 1000 ms
         int timeQuantum = 2000 + random.nextInt(4) * 1000; // Random: 2000, 3000, 4000, or 5000
@@ -226,7 +241,7 @@ public class SchedulerSimulation {
         while (!processQueue.isEmpty()) {
             // Get the next thread from the queue (FIFO)
             Thread currentThread = processQueue.poll(); // Dequeues the next thread
-            
+            contextSwitchCount++;
             // Print the current process queue (list of process IDs in the queue)
             System.out.println(Colors.BOLD + Colors.MAGENTA + "┌─ Ready Queue " + "─".repeat(65) + Colors.RESET);
             System.out.print(Colors.MAGENTA + "│ " + Colors.RESET + Colors.BRIGHT_WHITE + "[" + Colors.RESET);
@@ -277,6 +292,19 @@ public class SchedulerSimulation {
         System.out.println(Colors.BOLD + Colors.BRIGHT_GREEN + 
                           "╔════════════════════════════════════════════════════════════════════════════════╗" + 
                           Colors.RESET);
+        // --- Feature 3: Print Process Execution Summary Table ---
+        System.out.println("\n" + Colors.BOLD + Colors.BRIGHT_YELLOW + "===========================================================================");
+        System.out.println("                         PROCESS EXECUTION SUMMARY                         ");
+        System.out.println("===========================================================================" + Colors.RESET);
+        System.out.printf("%-15s | %-15s | %-15s | %-15s%n", "Process Name", "Burst Time (ms)", "Waiting Time (ms)", "Turnaround (ms)");
+        System.out.println("---------------------------------------------------------------------------");
+
+        for (Process process : processMap.values()) {
+            long turnaroundTime = process.getWaitingTime() + process.getBurstTime();
+            System.out.printf("%-15s | %-15d | %-15d | %-15d%n",
+                    process.getName(), process.getBurstTime(), process.getWaitingTime(), turnaroundTime);
+        }
+        System.out.println("===========================================================================\n");
         System.out.println(Colors.BOLD + Colors.BRIGHT_GREEN + "║" + Colors.RESET + 
                           Colors.BG_GREEN + Colors.WHITE + Colors.BOLD + 
                           "                     ✓  ALL PROCESSES COMPLETED  ✓                            " + 
