@@ -29,17 +29,17 @@
 
 | Field | Your Answer |
 |-------|-------------|
-| **Full Name** | [Write your full name here] |
-| **Student ID** | [Write your student ID here] |
-| **University Email** | [yourid]@std.psau.edu.sa |
-| **GitHub Username** | [your-github-username] |
+| **Full Name** | [Danah khalied alsmari] |
+| **Student ID** | [W445052043] |
+| **University Email** | [445052043@std.psau.edu.sa] |
+| **GitHub Username** | [Danah6677] |
 | **Repository Link** | [Paste your repository link here] |
  
 ---
 
 ## 🎥 Video Link
 
-**Video Link**: [Paste your video link here]
+**Video Link**: [https://drive.google.com/file/d/1gdGViU4aSijZ2RxLGHSm2zxUNVHiJNTy/view?usp=sharing]
 
 > ⚠️ **WARNING:** The video must be **publicly accessible** ("Anyone with the link can view") on **Google Drive**, **YouTube (Unlisted or Public)** or any other cloud file-sharing system. A private, restricted or broken link counts as a **missing video (-1 mark)**.
 >
@@ -129,56 +129,56 @@
 
 ## Your Development Log
 
-### Entry 1 - [Date and Time]
+### Entry 1 - [october3,2026.1:14 ]
 **What I did**:
-
+Added my student ID to the project
 **Details**:
-
+SchedulerSimulation.java, updated the student ID on line 150 to my actual ID, compiled the code, and made sure it runs successfully without any errors.
 **Challenges**:
-
+Had to check where the student ID variable was located inside the main simulation file.
 **Solution**:
-
+Searched for the studentID variable and replaced the placeholder with my university ID, then pushed the first commit.
 **Time spent**:
-
+25 minutes
 ---
 
-### Entry 2 - [Date and Time]
+### Entry 2 - [october3,2026.2:39]
 **What I did**:
-
+Implemented the process priority feature.
 **Details**:
-
+Added a random priority field ranging from 1 to 10 for each process and printed it out whenever a process enters the ready queue while maintaining the standard FIFO order.
 **Challenges**:
-
+Making sure the priority assignment did not disrupt the existing FIFO queue behavior.
 **Solution**:
-
+Generated a random number between 1 and 10 and logged the priority value inside the process creation/queue logic
 **Time spent**:
-
+ 40minutes
 ---
 
-### Entry 3 - [Date and Time]
+### Entry 3 - [october3,2026.3:59]
 **What I did**:
-
+Added the context switch counter feature.
 **Details**:
-
+Created a static counter variable that increases by one every single time a new process starts its execution, and printed the final total sum at the end of the simulation.
 **Challenges**:
-
+Figuring out where to increment the counter so it accurately reflects every actual switch.
 **Solution**:
-
+Placed the increment statement right before starting the thread execution block so it tracks every context switch properly.
 **Time spent**:
-
+35minutes
 ---
 
-### Entry 4 - [Date and Time]
+### Entry 4 - [october3,2026.5:12]
 **What I did**:
-
+Implemented waiting time tracking and the final summary table.
 **Details**:
-
+Used System.currentTimeMillis() to track and calculate waiting times, and generated a clean final execution summary table showing the process name, burst time, waiting time, and turnaround time.
 **Challenges**:
-
+Formatting the final table so that the calculations and numbers align neatly in the console output.
 **Solution**:
-
+Calculated turnaround time as waiting time plus burst time, and printed the formatted results table at the simulation finish point.
 **Time spent**:
-
+50minutes
 ---
 
 ### Entry 5 - [Date and Time]
@@ -211,14 +211,14 @@
 
 > 💡 **TIP:** Fill this in **last**, after all entries are written.
 
-**Total time spent on assignment**: [X hours]
+**Total time spent on assignment**: [8 hours]
 
 **Most challenging part**:
-
+Managing the timing logic for waiting times and ensuring the context switch counter incremented accurately at the correct execution points without affecting the Round Robin queue order.
 **Most interesting learning**:
-
+Understanding how Java threads simulate operating system processes and how time tracking functions like currentTimeMillis()can measure performance metrics.
 **What I would do differently next time**:
-
+Plan out all the feature variables and method structures on paper beforehand to speed up the coding and commit process.
 ---
 
 # Part B: Reflection (0.5 mark)
@@ -237,7 +237,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[I learned how to create threads using the Runnable interface and start them with Thread.start(). I also practiced managing synchronization and waiting for threads to finish using Thread.join(). Using Thread.sleep() helped me realistically simulate CPU work and time delays. It was amazing to see how multiple processes run concurrently and how the OS manages them]
 
 ## Question 2: What was the most challenging part of this assignment?
 
@@ -245,7 +245,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[The hardest part was managing the timing logic and tracking waiting times accurately for each process. Ensuring the context switch counter incremented correctly right before execution required careful debugging. Tracing the scheduler's flow step-by-step took time to understand fully. Overcoming this required testing small code changes continuously]
 
 ## Question 3: How did you overcome the challenges you faced?
 
@@ -253,7 +253,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[I overcame the challenges by following a step-by-step debugging approach. First, I re-read the assignment instructions carefully to understand the required behavior. Then, I used System.out.println statements to trace queue updates and monitor variables. Testing my code after every small change helped me isolate and fix errors quickly.]
 
 ## Question 4: How can you apply multithreading concepts in real-world applications?
 
@@ -261,7 +261,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[Multithreading is widely used in software to improve performance and user responsiveness. For example, web browsers use separate threads for downloading files and rendering pages simultaneously. Mobile apps use background threads for network requests to keep the user interface smooth. Understanding scheduling algorithms helps in writing efficient concurrent code]
 
 ### Optional: What would you like to learn more about?
 
@@ -293,7 +293,7 @@
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+[A process has an independent memory space, while a thread is a lightweight execution unit that shares memory within a process. We used Java threads because they share memory efficiently and have low overhead. In SchedulerSimulation.java, Process is a simulated process driven by a real Java thread. This allows the scheduler to easily simulate multitasking within a single application.]
 
 ## Question 2: Ready Queue Behavior
 
@@ -305,7 +305,7 @@
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+[If a process does not finish within its time quantum, its remaining burst time decreases, and it is re-queued back into the ready queue. For example, a process with a large burst time shows multiple entries like: Process P1 added to ready queue, burst time remaining: 3 This ensures fairness by pausing long processes to give others CPU time.]
 
 Example from my output:
 ```
@@ -323,15 +323,15 @@ Example from my output:
 
 **Your Answer:** *(3-5 sentences overall; one short explanation per state)*
 
-1. **New**: [When is P1 in the New state?]
+1. **New**: []P1 enters this state when the process object is newly instantiated in memory before its thread is initialized
 
-2. **Runnable**: [When does P1 become Runnable?]
+2. **Runnable**: [P1 becomes runnable when it is added to the ready queue using the addProcessToQueue() method, waiting for CPU scheduling]
 
-3. **Running**: [When is P1 Running?]
+3. **Running**: [P1 transitions to the running state when the scheduler loop selects it and triggers Thread.start() to begin execution]
 
-4. **Waiting**: [When and why would a thread be Waiting?]
+4. **Waiting**: [P1's thread enters a waiting or sleeping state while executing its task inside the run() method using Thread.sleep()]
 
-5. **Terminated**: [When is P1 Terminated?]
+5. **Terminated**: [P1 becomes terminated once its execution finishes completely, and the main thread waits for its completion using Thread.join()]
 
 ## Question 4: Real-World Applications
 
@@ -341,32 +341,32 @@ Example from my output:
 
 **Your Answer:** *(3-5 sentences per example)*
 
-### Example 1 (operating-system level): [Name of scenario]
+### Example 1 (operating-system level): [CPU Time-Sharing]
 
 **Description**:
-[Describe the real-world scenario.]
+[An OS CPU scheduler allocates short time slices to multiple active applications running on a computer system]
 
 **Why Round-Robin works well here**:
-[Fairness, responsiveness, predictability?]
+[The "process" is an active application window, the "time quantum" is the CPU slice granted by the kernel, and the "context switch" is saving the current app state. Round-Robin guarantees fairness, high responsiveness, and predictable]
 
-### Example 2: [Name of application/scenario]
+### Example 2: [Network Printer Spooler]
 
 **Description**:
-[Describe the real-world scenario or application.]
+[A central network print server that receives and schedules multiple print jobs simultaneously from different users]
 
 **Why Round-Robin works well here**:
-[Fairness, responsiveness, predictability?]
+[The "process" is the document file being printed, the "time quantum" is the allocated page processing time slice, and the "context switch" is pausing one print job to process another. Round-Robin works exceptionally well here because it ensures absolute fairness, preventing a single huge document from hogging the printer and allowing all users to get their pages printed promptly]
 
 ## Summary
 
 **Key concepts I understood through these questions:**
-1.
-2.
-3.
+1. Multithreading concepts and thread lifecycle states.
+2. CPU scheduling and Round-Robin algorithm behavior.
+3. How to measure performance metrics using time functions.
 
 **Concepts I need to study more:**
-1.
-2.
+1. Advanced thread synchronization and deadlock prevention.
+2. Performance optimization and process waiting time calculations.
 
 ---
 
